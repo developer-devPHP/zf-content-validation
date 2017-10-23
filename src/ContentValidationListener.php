@@ -206,6 +206,10 @@ class ContentValidationListener implements ListenerAggregateInterface, EventMana
             $data = [];
         }
 
+        $routParams = $dataContainer->getRouteParams();
+        unset($routParams['controller'], $routParams['version']);
+        $data = ArrayUtils::merge($data, $routParams);
+
         $isCollection = $this->isCollection($controllerService, $data, $routeMatches, $request);
 
         $files = $request->getFiles();
